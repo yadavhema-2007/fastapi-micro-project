@@ -26,6 +26,23 @@ def test_read_root_json_content():
     assert response.json() == {"message": "Welcome to the FastAPI Micro Project!"}
 
 
+def test_health_check_status_code():
+    """
+    Verify that GET /health returns HTTP 200 OK.
+    """
+    response = client.get("/health")
+    assert response.status_code == 200
+
+
+def test_health_check_json_content():
+    """
+    Verify that GET /health returns {"status": "ok"}.
+    """
+    response = client.get("/health")
+    assert response.json() == {"status": "ok"}
+
+
+
 def test_nonexistent_route_returns_404():
     """
     Verify that requesting an undefined route returns HTTP 404 Not Found.

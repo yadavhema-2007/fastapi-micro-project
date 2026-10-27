@@ -22,3 +22,15 @@ def read_root():
     Response: JSON object with a greeting message
     """
     return {"message": "Welcome to the FastAPI Micro Project!"}
+
+
+@app.get("/health")
+def health_check():
+    """
+    Health check endpoint to verify that the service is running properly.
+    HTTP Method: GET
+    Route: /health
+    Response: JSON object {"status": "ok"}
+    """
+    return {"status": "ok"}
+
