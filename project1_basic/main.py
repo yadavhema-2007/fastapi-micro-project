@@ -24,7 +24,7 @@ def read_root():
     return {"message": "Welcome to the FastAPI Micro Project!"}
 
 
-@app.get("/health")
+@app.get("/health", summary="Service health check", tags=["Health"])
 def health_check():
     """
     Health check endpoint to verify that the service is running properly.
@@ -33,4 +33,3 @@ def health_check():
     Response: JSON object {"status": "ok"}
     """
     return {"status": "ok"}
-
