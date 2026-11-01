@@ -18,31 +18,37 @@ function Show-Header {
 do {
     Show-Header
     Write-Host "Select an action to demonstrate:" -ForegroundColor White
-    Write-Host " [1] Run All Automated Tests (Project 1 + Project 2)" -ForegroundColor Green
-    Write-Host " [2] Run Project 1 Tests (Basic Greeting API)" -ForegroundColor Green
-    Write-Host " [3] Run Project 2 Tests (Task Management CRUD API)" -ForegroundColor Green
-    Write-Host " [4] Start Project 1 Live Server (Port 8000 + Swagger Docs)" -ForegroundColor Magenta
-    Write-Host " [5] Start Project 2 Live Server (Port 8001 + Web Dashboard & Docs)" -ForegroundColor Magenta
-    Write-Host " [6] Show Git Branching Graph & Commit History" -ForegroundColor Yellow
-    Write-Host " [7] Show Git Diff of feature/health-check against main" -ForegroundColor Yellow
-    Write-Host " [8] View Deliverables Checklist (CHECKLIST.md)" -ForegroundColor Cyan
-    Write-Host " [9] View Instructor Oral Defense & Code Guide (INSTRUCTOR_DEMO_GUIDE.md)" -ForegroundColor Cyan
-    Write-Host " [Q] Quit" -ForegroundColor Red
+    Write-Host " [1]  Run All Automated Tests (Projects 1 + 2 + 3: 33 Tests)" -ForegroundColor Green
+    Write-Host " [2]  Run Project 1 Tests (Basic Greeting API)" -ForegroundColor Green
+    Write-Host " [3]  Run Project 2 Tests (Task Management In-Memory CRUD)" -ForegroundColor Green
+    Write-Host " [4]  Run Project 3 Tests (SQLite + SQLAlchemy Persistent API)" -ForegroundColor Green
+    Write-Host " [5]  Start Project 1 Server (Port 8000 + Swagger Docs)" -ForegroundColor Magenta
+    Write-Host " [6]  Start Project 2 Server (Port 8001 + Web Dashboard & Docs)" -ForegroundColor Magenta
+    Write-Host " [7]  Start Project 3 Server (Port 8002 + SQLite Database)" -ForegroundColor Magenta
+    Write-Host " [8]  Show Git Branching Graph & Commit History" -ForegroundColor Yellow
+    Write-Host " [9]  Show Git Diff of feature/health-check against main" -ForegroundColor Yellow
+    Write-Host " [10] View Deliverables Checklist (CHECKLIST.md)" -ForegroundColor Cyan
+    Write-Host " [11] View Instructor Oral Defense & Code Guide" -ForegroundColor Cyan
+    Write-Host " [Q]  Quit" -ForegroundColor Red
     Write-Host ""
     $choice = Read-Host "Enter your choice"
 
     switch ($choice.ToUpper()) {
         "1" {
-            Write-Host "`n>>> [1/2] Running Project 1 Tests..." -ForegroundColor Cyan
+            Write-Host "`n>>> [1/3] Running Project 1 Tests..." -ForegroundColor Cyan
             Set-Location "$PSScriptRoot\project1_basic"
             & $PythonExe -m pytest -v
 
-            Write-Host "`n>>> [2/2] Running Project 2 Tests..." -ForegroundColor Cyan
+            Write-Host "`n>>> [2/3] Running Project 2 Tests..." -ForegroundColor Cyan
             Set-Location "$PSScriptRoot\project2_crud"
+            & $PythonExe -m pytest -v
+
+            Write-Host "`n>>> [3/3] Running Project 3 Tests..." -ForegroundColor Cyan
+            Set-Location "$PSScriptRoot\project3_database"
             & $PythonExe -m pytest -v
             Set-Location $PSScriptRoot
 
-            Write-Host "`nAll test suites completed! Press Enter to return to menu..." -ForegroundColor Gray
+            Write-Host "`nAll 3 test suites completed! Press Enter to return to menu..." -ForegroundColor Gray
             Read-Host
         }
         "2" {
@@ -62,6 +68,14 @@ do {
             Read-Host
         }
         "4" {
+            Write-Host "`n>>> Running Project 3 Tests (SQLite In-Memory)..." -ForegroundColor Cyan
+            Set-Location "$PSScriptRoot\project3_database"
+            & $PythonExe -m pytest -v
+            Set-Location $PSScriptRoot
+            Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
+            Read-Host
+        }
+        "5" {
             Write-Host "`n>>> Starting Project 1 on http://127.0.0.1:8000" -ForegroundColor Cyan
             Write-Host ">>> Interactive Docs: http://127.0.0.1:8000/docs" -ForegroundColor Yellow
             Write-Host ">>> Press Ctrl+C in this terminal when finished to stop the server.`n" -ForegroundColor Gray
@@ -69,7 +83,7 @@ do {
             & $UvicornExe main:app --reload --port 8000
             Set-Location $PSScriptRoot
         }
-        "5" {
+        "6" {
             Write-Host "`n>>> Starting Project 2 on http://127.0.0.1:8001" -ForegroundColor Cyan
             Write-Host ">>> Interactive Web Dashboard: http://127.0.0.1:8001/dashboard" -ForegroundColor Green
             Write-Host ">>> Interactive Swagger Docs:  http://127.0.0.1:8001/docs" -ForegroundColor Yellow
@@ -78,25 +92,34 @@ do {
             & $UvicornExe main:app --reload --port 8001
             Set-Location $PSScriptRoot
         }
-        "6" {
+        "7" {
+            Write-Host "`n>>> Starting Project 3 on http://127.0.0.1:8002" -ForegroundColor Cyan
+            Write-Host ">>> Persistent Database: tasks.db (SQLite on disk)" -ForegroundColor Green
+            Write-Host ">>> Interactive Swagger Docs:  http://127.0.0.1:8002/docs" -ForegroundColor Yellow
+            Write-Host ">>> Press Ctrl+C in this terminal when finished to stop the server.`n" -ForegroundColor Gray
+            Set-Location "$PSScriptRoot\project3_database"
+            & $UvicornExe main:app --reload --port 8002
+            Set-Location $PSScriptRoot
+        }
+        "8" {
             Write-Host "`n>>> Git Branching Tree and History:" -ForegroundColor Cyan
             git log --graph --oneline --all
             Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
             Read-Host
         }
-        "7" {
+        "9" {
             Write-Host "`n>>> Code Differences for PR (feature/health-check vs main):" -ForegroundColor Cyan
             git diff main...feature/health-check
             Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
             Read-Host
         }
-        "8" {
+        "10" {
             Write-Host "`n>>> Displaying Deliverables Checklist (CHECKLIST.md):`n" -ForegroundColor Cyan
             Get-Content "$PSScriptRoot\CHECKLIST.md" | Out-Host -Paging
             Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
             Read-Host
         }
-        "9" {
+        "11" {
             Write-Host "`n>>> Displaying Instructor Defense Guide (INSTRUCTOR_DEMO_GUIDE.md):`n" -ForegroundColor Cyan
             Get-Content "$PSScriptRoot\INSTRUCTOR_DEMO_GUIDE.md" | Out-Host -Paging
             Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
@@ -107,7 +130,7 @@ do {
             break
         }
         default {
-            Write-Host "Invalid choice, please select 1-9 or Q." -ForegroundColor Red
+            Write-Host "Invalid choice, please select 1-11 or Q." -ForegroundColor Red
             Start-Sleep -Seconds 1
         }
     }

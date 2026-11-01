@@ -18,3 +18,14 @@ services:
     ports:
       - "8001:8001"
     restart: unless-stopped
+
+  project3_database:
+    build:
+      context: ./project3_database
+      dockerfile: Dockerfile
+    container_name: fastapi_project3_database
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./project3_database/tasks.db:/app/tasks.db
+    restart: unless-stopped

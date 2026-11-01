@@ -16,7 +16,7 @@ Accept: application/json
 
 
 ### ==============================================================================
-### PROJECT 2: TASK MANAGEMENT CRUD API (PORT 8001)
+### PROJECT 2: TASK MANAGEMENT IN-MEMORY CRUD API (PORT 8001)
 ### ==============================================================================
 
 ### 1. Root Message
@@ -85,3 +85,41 @@ DELETE http://127.0.0.1:8001/tasks/1
 ### 11. Verify Deletion (Should return 404)
 GET http://127.0.0.1:8001/tasks/1
 Accept: application/json
+
+
+### ==============================================================================
+### PROJECT 3: PERSISTENT SQLITE + SQLALCHEMY API (PORT 8002)
+### ==============================================================================
+
+### 1. Root Welcome & Persistence Info
+GET http://127.0.0.1:8002/
+Accept: application/json
+
+### 2. List Tasks from SQLite
+GET http://127.0.0.1:8002/tasks
+Accept: application/json
+
+### 3. Create Persistent Task
+POST http://127.0.0.1:8002/tasks
+Content-Type: application/json
+
+{
+  "title": "Task Saved to SQLite Disk Database",
+  "completed": false
+}
+
+### 4. Retrieve Saved Task by ID (ID: 1)
+GET http://127.0.0.1:8002/tasks/1
+Accept: application/json
+
+### 5. Update Persistent Task
+PUT http://127.0.0.1:8002/tasks/1
+Content-Type: application/json
+
+{
+  "title": "Task Saved to SQLite Disk Database (Updated)",
+  "completed": true
+}
+
+### 6. Delete Persistent Task
+DELETE http://127.0.0.1:8002/tasks/1

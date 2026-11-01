@@ -37,3 +37,11 @@ jobs:
       - name: Run Project 2 Tests
         run: |
           pytest project2_crud -v
+
+      - name: Install Project 3 Dependencies
+        run: |
+          pip install -r project3_database/requirements.txt
+
+      - name: Run Project 3 Tests
+        run: |
+          pytest project3_database -v
