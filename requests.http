@@ -1,0 +1,87 @@
+### ==============================================================================
+### PROJECT 1: BASIC GREETING & HEALTH API (PORT 8000)
+### ==============================================================================
+
+### 1. Root Welcome Message
+GET http://127.0.0.1:8000/
+Accept: application/json
+
+### 2. Service Health Check
+GET http://127.0.0.1:8000/health
+Accept: application/json
+
+### 3. Nonexistent Route (Should return 404)
+GET http://127.0.0.1:8000/nonexistent-route
+Accept: application/json
+
+
+### ==============================================================================
+### PROJECT 2: TASK MANAGEMENT CRUD API (PORT 8001)
+### ==============================================================================
+
+### 1. Root Message
+GET http://127.0.0.1:8001/
+Accept: application/json
+
+### 2. List All Tasks (Initially Empty)
+GET http://127.0.0.1:8001/tasks
+Accept: application/json
+
+### 3. Create Task 1 (Valid)
+POST http://127.0.0.1:8001/tasks
+Content-Type: application/json
+
+{
+  "title": "Learn FastAPI & Pydantic",
+  "completed": false
+}
+
+### 4. Create Task 2 (Valid - Defaults completed to false)
+POST http://127.0.0.1:8001/tasks
+Content-Type: application/json
+
+{
+  "title": "Prepare Instructor Presentation"
+}
+
+### 5. Create Task (Invalid - Empty Title, should return 422)
+POST http://127.0.0.1:8001/tasks
+Content-Type: application/json
+
+{
+  "title": "",
+  "completed": false
+}
+
+### 6. Create Task (Invalid - Only Whitespace, should return 422)
+POST http://127.0.0.1:8001/tasks
+Content-Type: application/json
+
+{
+  "title": "    ",
+  "completed": false
+}
+
+### 7. Get Task by ID (ID: 1)
+GET http://127.0.0.1:8001/tasks/1
+Accept: application/json
+
+### 8. Get Nonexistent Task (Should return 404)
+GET http://127.0.0.1:8001/tasks/999
+Accept: application/json
+
+### 9. Update Task (ID: 1 - Mark Completed)
+PUT http://127.0.0.1:8001/tasks/1
+Content-Type: application/json
+
+{
+  "title": "Learn FastAPI & Pydantic (Completed)",
+  "completed": true
+}
+
+### 10. Delete Task (ID: 1 - Should return 204 No Content)
+DELETE http://127.0.0.1:8001/tasks/1
+
+### 11. Verify Deletion (Should return 404)
+GET http://127.0.0.1:8001/tasks/1
+Accept: application/json

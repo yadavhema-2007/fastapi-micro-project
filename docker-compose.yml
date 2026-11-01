@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  project1_basic:
+    build:
+      context: ./project1_basic
+      dockerfile: Dockerfile
+    container_name: fastapi_project1_basic
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  project2_crud:
+    build:
+      context: ./project2_crud
+      dockerfile: Dockerfile
+    container_name: fastapi_project2_crud
+    ports:
+      - "8001:8001"
+    restart: unless-stopped

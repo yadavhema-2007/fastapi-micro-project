@@ -22,7 +22,7 @@ do {
     Write-Host " [2] Run Project 1 Tests (Basic Greeting API)" -ForegroundColor Green
     Write-Host " [3] Run Project 2 Tests (Task Management CRUD API)" -ForegroundColor Green
     Write-Host " [4] Start Project 1 Live Server (Port 8000 + Swagger Docs)" -ForegroundColor Magenta
-    Write-Host " [5] Start Project 2 Live Server (Port 8001 + Swagger Docs)" -ForegroundColor Magenta
+    Write-Host " [5] Start Project 2 Live Server (Port 8001 + Web Dashboard & Docs)" -ForegroundColor Magenta
     Write-Host " [6] Show Git Branching Graph & Commit History" -ForegroundColor Yellow
     Write-Host " [7] Show Git Diff of feature/health-check against main" -ForegroundColor Yellow
     Write-Host " [8] View Deliverables Checklist (CHECKLIST.md)" -ForegroundColor Cyan
@@ -71,7 +71,8 @@ do {
         }
         "5" {
             Write-Host "`n>>> Starting Project 2 on http://127.0.0.1:8001" -ForegroundColor Cyan
-            Write-Host ">>> Interactive Docs: http://127.0.0.1:8001/docs" -ForegroundColor Yellow
+            Write-Host ">>> Interactive Web Dashboard: http://127.0.0.1:8001/dashboard" -ForegroundColor Green
+            Write-Host ">>> Interactive Swagger Docs:  http://127.0.0.1:8001/docs" -ForegroundColor Yellow
             Write-Host ">>> Press Ctrl+C in this terminal when finished to stop the server.`n" -ForegroundColor Gray
             Set-Location "$PSScriptRoot\project2_crud"
             & $UvicornExe main:app --reload --port 8001
