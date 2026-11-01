@@ -12,3 +12,9 @@ app = FastAPI(
 def read_root():
     """Returns a welcome message in JSON format."""
     return {"message": "Welcome to the FastAPI Micro Project!"}
+
+# Health-check endpoint: Returns service health status
+@app.get("/health")
+def read_health():
+    """Health check endpoint to verify that the service is alive and healthy."""
+    return {"status": "ok"}

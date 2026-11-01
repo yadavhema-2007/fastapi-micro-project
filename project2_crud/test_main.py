@@ -22,13 +22,22 @@ def run_before_and_after_each_test():
 # ---------------------------------------------------------
 
 def test_read_root():
-    """Verify that root endpoint returns status 200 and docs link."""
+    """Verify that root endpoint returns status 200, docs link, and dashboard link."""
     response = client.get("/")
     assert response.status_code == 200
     assert response.json() == {
         "message": "Welcome to the Task Management API!",
-        "documentation": "/docs"
+        "documentation": "/docs",
+        "dashboard": "/dashboard"
     }
+
+
+def test_serve_dashboard():
+    """Verify that /dashboard returns HTTP 200 and serves HTML."""
+    response = client.get("/dashboard")
+    assert response.status_code == 200
+    assert "text/html" in response.headers["content-type"]
+    assert "Task Management Studio" in response.text
 
 
 # ---------------------------------------------------------

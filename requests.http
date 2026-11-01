@@ -1,0 +1,167 @@
+### ==============================================================================
+### PROJECT 1: BASIC GREETING & HEALTH API (PORT 8000)
+### ==============================================================================
+
+### 1. Root Welcome Message
+GET http://127.0.0.1:8000/
+Accept: application/json
+
+### 2. Service Health Check
+GET http://127.0.0.1:8000/health
+Accept: application/json
+
+### 3. Nonexistent Route (Should return 404)
+GET http://127.0.0.1:8000/nonexistent-route
+Accept: application/json
+
+
+### ==============================================================================
+### PROJECT 2: TASK MANAGEMENT IN-MEMORY CRUD API (PORT 8001)
+### ==============================================================================
+
+### 1. Root Message
+GET http://127.0.0.1:8001/
+Accept: application/json
+
+### 2. List All Tasks (Initially Empty)
+GET http://127.0.0.1:8001/tasks
+Accept: application/json
+
+### 3. Create Task 1 (Valid)
+POST http://127.0.0.1:8001/tasks
+Content-Type: application/json
+
+{
+  "title": "Learn FastAPI & Pydantic",
+  "completed": false
+}
+
+### 4. Create Task 2 (Valid - Defaults completed to false)
+POST http://127.0.0.1:8001/tasks
+Content-Type: application/json
+
+{
+  "title": "Prepare Instructor Presentation"
+}
+
+### 5. Create Task (Invalid - Empty Title, should return 422)
+POST http://127.0.0.1:8001/tasks
+Content-Type: application/json
+
+{
+  "title": "",
+  "completed": false
+}
+
+### 6. Create Task (Invalid - Only Whitespace, should return 422)
+POST http://127.0.0.1:8001/tasks
+Content-Type: application/json
+
+{
+  "title": "    ",
+  "completed": false
+}
+
+### 7. Get Task by ID (ID: 1)
+GET http://127.0.0.1:8001/tasks/1
+Accept: application/json
+
+### 8. Get Nonexistent Task (Should return 404)
+GET http://127.0.0.1:8001/tasks/999
+Accept: application/json
+
+### 9. Update Task (ID: 1 - Mark Completed)
+PUT http://127.0.0.1:8001/tasks/1
+Content-Type: application/json
+
+{
+  "title": "Learn FastAPI & Pydantic (Completed)",
+  "completed": true
+}
+
+### 10. Delete Task (ID: 1 - Should return 204 No Content)
+DELETE http://127.0.0.1:8001/tasks/1
+
+### 11. Verify Deletion (Should return 404)
+GET http://127.0.0.1:8001/tasks/1
+Accept: application/json
+
+
+### ==============================================================================
+### PROJECT 3: PERSISTENT SQLITE + SQLALCHEMY API (PORT 8002)
+### ==============================================================================
+
+### 1. Root Welcome & Persistence Info
+GET http://127.0.0.1:8002/
+Accept: application/json
+
+### 2. List Tasks from SQLite
+GET http://127.0.0.1:8002/tasks
+Accept: application/json
+
+### 3. Create Persistent Task
+POST http://127.0.0.1:8002/tasks
+Content-Type: application/json
+
+{
+  "title": "Task Saved to SQLite Disk Database",
+  "completed": false
+}
+
+### 4. Retrieve Saved Task by ID (ID: 1)
+GET http://127.0.0.1:8002/tasks/1
+Accept: application/json
+
+### 5. Update Persistent Task
+PUT http://127.0.0.1:8002/tasks/1
+Content-Type: application/json
+
+{
+  "title": "Task Saved to SQLite Disk Database (Updated)",
+  "completed": true
+}
+
+### 6. Delete Persistent Task
+DELETE http://127.0.0.1:8002/tasks/1
+
+
+### ==============================================================================
+### PROJECT 4: JWT AUTHENTICATION & SECURITY (PORT 8003)
+### ==============================================================================
+
+### 1. Public Welcome
+GET http://127.0.0.1:8003/
+Accept: application/json
+
+### 2. Register New User
+POST http://127.0.0.1:8003/auth/register
+Content-Type: application/json
+
+{
+  "username": "developer",
+  "password": "supersecretpassword123"
+}
+
+### 3. Login to get JWT Token
+# @name login
+POST http://127.0.0.1:8003/auth/login
+Content-Type: application/json
+
+{
+  "username": "developer",
+  "password": "supersecretpassword123"
+}
+
+### 4. Access Protected Profile (Replace YOUR_TOKEN_HERE with token from login response)
+GET http://127.0.0.1:8003/auth/me
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+
+### 5. Access Protected Confidential Vault Data
+GET http://127.0.0.1:8003/protected-data
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+
+### 6. Attempt Unauthorized Access (Should return 401/403)
+GET http://127.0.0.1:8003/protected-data
+Accept: application/json

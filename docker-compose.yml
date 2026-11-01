@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  project1_basic:
+    build:
+      context: ./project1_basic
+      dockerfile: Dockerfile
+    container_name: fastapi_project1_basic
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  project2_crud:
+    build:
+      context: ./project2_crud
+      dockerfile: Dockerfile
+    container_name: fastapi_project2_crud
+    ports:
+      - "8001:8001"
+    restart: unless-stopped
+
+  project3_database:
+    build:
+      context: ./project3_database
+      dockerfile: Dockerfile
+    container_name: fastapi_project3_database
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./project3_database/tasks.db:/app/tasks.db
+    restart: unless-stopped
+
+  project4_auth:
+    build:
+      context: ./project4_auth
+      dockerfile: Dockerfile
+    container_name: fastapi_project4_auth
+    ports:
+      - "8003:8003"
+    restart: unless-stopped

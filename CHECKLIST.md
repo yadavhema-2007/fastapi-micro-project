@@ -17,7 +17,7 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
   - [x] Tests `GET /` successful response & expected JSON
   - [x] Tests `GET /health` successful response & `{"status": "ok"}`
   - [x] Tests nonexistent route returns HTTP `404 Not Found` and `{"detail": "Not Found"}`
-  - [x] All assertions verified: **3 passed** in 0.61s
+  - [x] All assertions verified: **3 passed** in 0.58s
 - [x] **Dependency File:** `project1_basic/requirements.txt`
 - [x] **Documentation:** `project1_basic/README.md`
 - [x] **Live Server Verification:** Uvicorn tested on port 8000; `/docs` verified.
@@ -39,38 +39,72 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
   - [x] Input validation: Rejects empty titles and blank whitespace with HTTP 422
   - [x] Returns HTTP 404 via `HTTPException` when task does not exist
   - [x] In-memory storage (`tasks_db = {}`) with runtime ephemeral persistence explained
+  - [x] Interactive single-page web dashboard served at `GET /dashboard`
 - [x] **Test File:** `project2_crud/test_main.py`
-  - [x] 15 comprehensive automated test cases
+  - [x] 16 comprehensive automated test cases
   - [x] Automatic test isolation fixture (`@pytest.fixture(autouse=True)`) resets database state between tests
-  - [x] Tests all positive flows, validation errors (empty string, whitespace, missing fields), missing tasks (404), and deletions (204)
-  - [x] All assertions verified: **15 passed** in 1.04s
+  - [x] Tests all positive flows, validation errors (empty string, whitespace, missing fields), dashboard HTML serving, missing tasks (404), and deletions (204)
+  - [x] All assertions verified: **16 passed** in 1.43s
 - [x] **Dependency File:** `project2_crud/requirements.txt`
 - [x] **Documentation:** `project2_crud/README.md`
-- [x] **Live Server Verification:** Uvicorn tested on port 8001; `/docs` verified.
+- [x] **Live Server Verification:** Uvicorn tested on port 8001; `/docs` & `/dashboard` verified.
+
+---
+
+## ✅ Advanced Addition: Persistent Database with SQLite & SQLAlchemy (`project3_database`)
+
+- [x] **Folder Created:** `project3_database/`
+- [x] **Architecture Files:**
+  - [x] `database.py`: SQLAlchemy engine, `SessionLocal`, `Base`, and `get_db()` dependency injection
+  - [x] `models.py`: SQLAlchemy ORM `Task` model mapped to SQL table
+  - [x] `schemas.py`: Pydantic v2 schemas with `ConfigDict(from_attributes=True)`
+  - [x] `crud.py`: Database query functions (create, read, update, delete)
+  - [x] `main.py`: FastAPI routes injecting `db: Session = Depends(get_db)`
+- [x] **Test File:** `project3_database/test_main.py`
+  - [x] Uses SQLite in-memory `:memory:` with `StaticPool`
+  - [x] Implements `app.dependency_overrides[get_db]`
+  - [x] All assertions verified: **14 passed** in 1.90s
+- [x] **Persistence Verified:** Real SQLite database file `tasks.db` created on disk.
+
+---
+
+## ✅ Security Addition: JWT Authentication & Password Hashing (`project4_auth`)
+
+- [x] **Folder Created:** `project4_auth/`
+- [x] **Architecture Files:**
+  - [x] `security.py`: PBKDF2-HMAC-SHA256 password hashing with salt & JWT signing/decoding
+  - [x] `schemas.py`: Registration, login, token, and user profile Pydantic models
+  - [x] `main.py`: Public auth routes (`/auth/register`, `/auth/login`) & protected endpoints (`/auth/me`, `/protected-data`)
+  - [x] `fastapi.security.HTTPBearer()` integration for Swagger UI Bearer token testing
+- [x] **Test File:** `project4_auth/test_main.py`
+  - [x] 13 automated test cases covering registration, duplicate collisions, wrong passwords, token signing, and unauthorized rejection
+  - [x] All assertions verified: **13 passed** in 1.37s
 
 ---
 
 ## ✅ Core Objective 3: Git Workflow & Branch States (A through F)
 
-- [x] **Step 1: Issue Preparation:**
-  - Issue: *"Add health-check endpoint to Basic Greeting API"*
-  - Acceptance criteria defined (endpoint, status code, test pass).
+- [x] **Step 1: Issue Created on GitHub:**
+  - Live Issue #1: https://github.com/yadavhema-2007/fastapi-micro-project/issues/1
+  - Title: *"Add health-check endpoint to Basic Greeting API"*
+  - Acceptance criteria verified.
 - [x] **Step 2: Branch Creation:**
-  - Feature branch created: `feature/health-check`
+  - Feature branch created & pushed: `feature/health-check`
 - [x] **Step 3: Uncommitted Changes:**
   - Files modified: `project1_basic/main.py`, `project1_basic/test_main.py`
   - Verified working directory changes using `git status` and `git diff`
 - [x] **Step 4: Automated Testing on Branch:**
-  - Executed `pytest` and confirmed all 3 tests passed before committing
+  - Executed `pytest` and confirmed all tests passed before committing
 - [x] **Step 5: Committed Changes:**
   - Staged with `git add`
   - Committed with `git commit -m "Add health check endpoint"`
   - Verified snapshot with `git log -1 --oneline` and clean `git status`
-- [x] **Step 6: Remote Push Guidance:**
-  - Checked `git remote -v` (transparently reported local repository state)
-  - Provided exact instructions to attach a GitHub remote and push branch
-- [x] **Step 7: Pull Request Specification:**
-  - PR title: *"Add health-check endpoint"*
+- [x] **Step 6: Remote Push Completed:**
+  - Remote repository created: https://github.com/yadavhema-2007/fastapi-micro-project
+  - Branches pushed to origin: `main` and `feature/health-check`
+- [x] **Step 7: Pull Request Opened Live on GitHub:**
+  - Live Pull Request #2: https://github.com/yadavhema-2007/fastapi-micro-project/pull/2
+  - PR title: *"Add health-check endpoint to Basic Greeting API"*
   - Description body, file diffs, test logs, and `Closes #1` closing reference included
   - Kept unmerged for instructor demonstration
 - [x] **Distinct Demonstration of 6 States:**
@@ -88,7 +122,7 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
 - [x] FastAPI: What it is, why it is used, comparison to Flask/Django
 - [x] API & REST API concepts, statelessness, client-server model
 - [x] HTTP methods: GET, POST, PUT, DELETE mapped to CRUD
-- [x] Endpoints, routes, JSON serialization, HTTP status codes (200, 201, 204, 400, 404, 422, 500)
+- [x] Endpoints, routes, JSON serialization, HTTP status codes (200, 201, 204, 400, 404, 409, 422, 500)
 - [x] `FastAPI()` application instance role
 - [x] Decorators: `@app.get()`, `@app.post()`, `@app.put()`, `@app.delete()`
 - [x] Pydantic schemas, validation, `Field` constraints, `@field_validator`
@@ -97,27 +131,20 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
 - [x] pytest & `fastapi.testclient.TestClient` mechanics
 - [x] Virtual environments (`.venv`) and `requirements.txt`
 - [x] Automated OpenAPI interactive documentation (`/docs` & `/redoc`)
-- [x] Line-by-line explanation of every source file in both projects
+- [x] Line-by-line explanation of every source file across all projects
 
 ---
 
 ## ✅ Additional Tools & Enhancements Added
 
-- [x] **GitHub Actions CI/CD Pipeline:** `.github/workflows/ci.yml`
-- [x] **Interactive Instructor Demo Menu:** `demo_runner.ps1`
+- [x] **Live Remote Repository:** https://github.com/yadavhema-2007/fastapi-micro-project
+- [x] **Live Pull Request:** https://github.com/yadavhema-2007/fastapi-micro-project/pull/2
+- [x] **Live Issue:** https://github.com/yadavhema-2007/fastapi-micro-project/issues/1
+- [x] **Interactive Web Dashboard:** `http://127.0.0.1:8001/dashboard`
+- [x] **REST Client Collection:** `requests.http` with 23 executable requests
+- [x] **Multi-Container Microservices:** `docker-compose.yml` and `Dockerfile`s for all 4 projects
+- [x] **Interactive Instructor Demo Menu:** `demo_runner.ps1` with 14 commands
 - [x] **Root Master README:** `README.md`
 - [x] **Dedicated Git Workflow Guide:** `GIT_WORKFLOW.md`
 - [x] **Oral Defense & Presentation Script:** `INSTRUCTOR_DEMO_GUIDE.md`
 - [x] **Persistent Mentor Dossier Artifact:** `fastapi_mentor_guide.md`
-
----
-
-## 📌 Pending Manual Action for Student
-
-- [ ] **Optional Remote GitHub Push:** If your instructor requires a live link on github.com:
-  ```powershell
-  git remote add origin https://github.com/<your-username>/fastapi-micro-project.git
-  git push -u origin main
-  git push -u origin feature/health-check
-  ```
-  *(All code, tests, and documentation are already complete on your local machine).*
