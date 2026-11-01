@@ -18,7 +18,7 @@ function Show-Header {
 do {
     Show-Header
     Write-Host "Select an action to demonstrate:" -ForegroundColor White
-    Write-Host " [1] Run All Automated Tests (pytest -v for both projects)" -ForegroundColor Green
+    Write-Host " [1] Run All Automated Tests (Project 1 + Project 2)" -ForegroundColor Green
     Write-Host " [2] Run Project 1 Tests (Basic Greeting API)" -ForegroundColor Green
     Write-Host " [3] Run Project 2 Tests (Task Management CRUD API)" -ForegroundColor Green
     Write-Host " [4] Start Project 1 Live Server (Port 8000 + Swagger Docs)" -ForegroundColor Magenta
@@ -31,20 +31,31 @@ do {
 
     switch ($choice.ToUpper()) {
         "1" {
-            Write-Host "`n>>> Running All Tests..." -ForegroundColor Cyan
+            Write-Host "`n>>> [1/2] Running Project 1 Tests..." -ForegroundColor Cyan
+            Set-Location "$PSScriptRoot\project1_basic"
             & $PythonExe -m pytest -v
-            Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
+
+            Write-Host "`n>>> [2/2] Running Project 2 Tests..." -ForegroundColor Cyan
+            Set-Location "$PSScriptRoot\project2_crud"
+            & $PythonExe -m pytest -v
+            Set-Location $PSScriptRoot
+
+            Write-Host "`nAll test suites completed! Press Enter to return to menu..." -ForegroundColor Gray
             Read-Host
         }
         "2" {
             Write-Host "`n>>> Running Project 1 Tests..." -ForegroundColor Cyan
-            & $PythonExe -m pytest project1_basic -v
+            Set-Location "$PSScriptRoot\project1_basic"
+            & $PythonExe -m pytest -v
+            Set-Location $PSScriptRoot
             Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
             Read-Host
         }
         "3" {
             Write-Host "`n>>> Running Project 2 Tests..." -ForegroundColor Cyan
-            & $PythonExe -m pytest project2_crud -v
+            Set-Location "$PSScriptRoot\project2_crud"
+            & $PythonExe -m pytest -v
+            Set-Location $PSScriptRoot
             Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
             Read-Host
         }
