@@ -17,7 +17,7 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
   - [x] Tests `GET /` successful response & expected JSON
   - [x] Tests `GET /health` successful response & `{"status": "ok"}`
   - [x] Tests nonexistent route returns HTTP `404 Not Found` and `{"detail": "Not Found"}`
-  - [x] All assertions verified: **3 passed** in 0.45s
+  - [x] All assertions verified: **3 passed** in 0.58s
 - [x] **Dependency File:** `project1_basic/requirements.txt`
 - [x] **Documentation:** `project1_basic/README.md`
 - [x] **Live Server Verification:** Uvicorn tested on port 8000; `/docs` verified.
@@ -44,7 +44,7 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
   - [x] 16 comprehensive automated test cases
   - [x] Automatic test isolation fixture (`@pytest.fixture(autouse=True)`) resets database state between tests
   - [x] Tests all positive flows, validation errors (empty string, whitespace, missing fields), dashboard HTML serving, missing tasks (404), and deletions (204)
-  - [x] All assertions verified: **16 passed** in 0.90s
+  - [x] All assertions verified: **16 passed** in 1.43s
 - [x] **Dependency File:** `project2_crud/requirements.txt`
 - [x] **Documentation:** `project2_crud/README.md`
 - [x] **Live Server Verification:** Uvicorn tested on port 8001; `/docs` & `/dashboard` verified.
@@ -63,8 +63,22 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
 - [x] **Test File:** `project3_database/test_main.py`
   - [x] Uses SQLite in-memory `:memory:` with `StaticPool`
   - [x] Implements `app.dependency_overrides[get_db]`
-  - [x] All assertions verified: **14 passed** in 1.91s
+  - [x] All assertions verified: **14 passed** in 1.90s
 - [x] **Persistence Verified:** Real SQLite database file `tasks.db` created on disk.
+
+---
+
+## ✅ Security Addition: JWT Authentication & Password Hashing (`project4_auth`)
+
+- [x] **Folder Created:** `project4_auth/`
+- [x] **Architecture Files:**
+  - [x] `security.py`: PBKDF2-HMAC-SHA256 password hashing with salt & JWT signing/decoding
+  - [x] `schemas.py`: Registration, login, token, and user profile Pydantic models
+  - [x] `main.py`: Public auth routes (`/auth/register`, `/auth/login`) & protected endpoints (`/auth/me`, `/protected-data`)
+  - [x] `fastapi.security.HTTPBearer()` integration for Swagger UI Bearer token testing
+- [x] **Test File:** `project4_auth/test_main.py`
+  - [x] 13 automated test cases covering registration, duplicate collisions, wrong passwords, token signing, and unauthorized rejection
+  - [x] All assertions verified: **13 passed** in 1.37s
 
 ---
 
@@ -79,7 +93,7 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
   - Files modified: `project1_basic/main.py`, `project1_basic/test_main.py`
   - Verified working directory changes using `git status` and `git diff`
 - [x] **Step 4: Automated Testing on Branch:**
-  - Executed `pytest` and confirmed all 3 tests passed before committing
+  - Executed `pytest` and confirmed all tests passed before committing
 - [x] **Step 5: Committed Changes:**
   - Staged with `git add`
   - Committed with `git commit -m "Add health check endpoint"`
@@ -106,7 +120,7 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
 - [x] FastAPI: What it is, why it is used, comparison to Flask/Django
 - [x] API & REST API concepts, statelessness, client-server model
 - [x] HTTP methods: GET, POST, PUT, DELETE mapped to CRUD
-- [x] Endpoints, routes, JSON serialization, HTTP status codes (200, 201, 204, 400, 404, 422, 500)
+- [x] Endpoints, routes, JSON serialization, HTTP status codes (200, 201, 204, 400, 404, 409, 422, 500)
 - [x] `FastAPI()` application instance role
 - [x] Decorators: `@app.get()`, `@app.post()`, `@app.put()`, `@app.delete()`
 - [x] Pydantic schemas, validation, `Field` constraints, `@field_validator`
@@ -122,10 +136,10 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
 ## ✅ Additional Tools & Enhancements Added
 
 - [x] **Interactive Web Dashboard:** `http://127.0.0.1:8001/dashboard`
-- [x] **REST Client Collection:** `requests.http` with 14 executable requests
-- [x] **Multi-Container Microservices:** `docker-compose.yml` and `Dockerfile`s for all 3 projects
-- [x] **GitHub Actions CI/CD Pipeline:** `.github/workflows/ci.yml` (runs 33 automated tests)
-- [x] **Interactive Instructor Demo Menu:** `demo_runner.ps1` with 11 commands
+- [x] **REST Client Collection:** `requests.http` with 23 executable requests
+- [x] **Multi-Container Microservices:** `docker-compose.yml` and `Dockerfile`s for all 4 projects
+- [x] **GitHub Actions CI/CD Pipeline:** `.github/workflows/ci.yml` (runs 46 automated tests)
+- [x] **Interactive Instructor Demo Menu:** `demo_runner.ps1` with 13 commands
 - [x] **Root Master README:** `README.md`
 - [x] **Dedicated Git Workflow Guide:** `GIT_WORKFLOW.md`
 - [x] **Oral Defense & Presentation Script:** `INSTRUCTOR_DEMO_GUIDE.md`
