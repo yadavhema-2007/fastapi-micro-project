@@ -84,11 +84,12 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
 
 ## ✅ Core Objective 3: Git Workflow & Branch States (A through F)
 
-- [x] **Step 1: Issue Preparation:**
-  - Issue: *"Add health-check endpoint to Basic Greeting API"*
-  - Acceptance criteria defined (endpoint, status code, test pass).
+- [x] **Step 1: Issue Created on GitHub:**
+  - Live Issue #1: https://github.com/yadavhema-2007/fastapi-micro-project/issues/1
+  - Title: *"Add health-check endpoint to Basic Greeting API"*
+  - Acceptance criteria verified.
 - [x] **Step 2: Branch Creation:**
-  - Feature branch created: `feature/health-check`
+  - Feature branch created & pushed: `feature/health-check`
 - [x] **Step 3: Uncommitted Changes:**
   - Files modified: `project1_basic/main.py`, `project1_basic/test_main.py`
   - Verified working directory changes using `git status` and `git diff`
@@ -98,11 +99,12 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
   - Staged with `git add`
   - Committed with `git commit -m "Add health check endpoint"`
   - Verified snapshot with `git log -1 --oneline` and clean `git status`
-- [x] **Step 6: Remote Push Guidance:**
-  - Checked `git remote -v` (transparently reported local repository state)
-  - Provided exact instructions to attach a GitHub remote and push branch
-- [x] **Step 7: Pull Request Specification:**
-  - PR title: *"Add health-check endpoint"*
+- [x] **Step 6: Remote Push Completed:**
+  - Remote repository created: https://github.com/yadavhema-2007/fastapi-micro-project
+  - Branches pushed to origin: `main` and `feature/health-check`
+- [x] **Step 7: Pull Request Opened Live on GitHub:**
+  - Live Pull Request #2: https://github.com/yadavhema-2007/fastapi-micro-project/pull/2
+  - PR title: *"Add health-check endpoint to Basic Greeting API"*
   - Description body, file diffs, test logs, and `Closes #1` closing reference included
   - Kept unmerged for instructor demonstration
 - [x] **Distinct Demonstration of 6 States:**
@@ -135,11 +137,13 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
 
 ## ✅ Additional Tools & Enhancements Added
 
+- [x] **Live Remote Repository:** https://github.com/yadavhema-2007/fastapi-micro-project
+- [x] **Live Pull Request:** https://github.com/yadavhema-2007/fastapi-micro-project/pull/2
+- [x] **Live Issue:** https://github.com/yadavhema-2007/fastapi-micro-project/issues/1
 - [x] **Interactive Web Dashboard:** `http://127.0.0.1:8001/dashboard`
 - [x] **REST Client Collection:** `requests.http` with 23 executable requests
 - [x] **Multi-Container Microservices:** `docker-compose.yml` and `Dockerfile`s for all 4 projects
-- [x] **GitHub Actions CI/CD Pipeline:** `.github/workflows/ci.yml` (runs 46 automated tests)
-- [x] **Interactive Instructor Demo Menu:** `demo_runner.ps1` with 13 commands
+- [x] **Interactive Instructor Demo Menu:** `demo_runner.ps1` with 14 commands
 - [x] **Root Master README:** `README.md`
 - [x] **Dedicated Git Workflow Guide:** `GIT_WORKFLOW.md`
 - [x] **Oral Defense & Presentation Script:** `INSTRUCTOR_DEMO_GUIDE.md`
