@@ -31,6 +31,7 @@ do {
     Write-Host " [11] Show Git Diff of feature/health-check against main" -ForegroundColor Yellow
     Write-Host " [12] View Deliverables Checklist (CHECKLIST.md)" -ForegroundColor Cyan
     Write-Host " [13] View Instructor Oral Defense & Code Guide" -ForegroundColor Cyan
+    Write-Host " [14] One-Click GitHub Remote Creation & Auto-PR (deploy_github.ps1)" -ForegroundColor Green
     Write-Host " [Q]  Quit" -ForegroundColor Red
     Write-Host ""
     $choice = Read-Host "Enter your choice"
@@ -148,12 +149,18 @@ do {
             Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
             Read-Host
         }
+        "14" {
+            Write-Host "`n>>> Executing Automated GitHub Deployment Script (deploy_github.ps1)..." -ForegroundColor Cyan
+            & "$PSScriptRoot\deploy_github.ps1"
+            Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
+            Read-Host
+        }
         "Q" {
             Write-Host "Exiting demo controller. Good luck with your presentation!" -ForegroundColor Green
             break
         }
         default {
-            Write-Host "Invalid choice, please select 1-13 or Q." -ForegroundColor Red
+            Write-Host "Invalid choice, please select 1-14 or Q." -ForegroundColor Red
             Start-Sleep -Seconds 1
         }
     }
