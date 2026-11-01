@@ -29,3 +29,12 @@ services:
     volumes:
       - ./project3_database/tasks.db:/app/tasks.db
     restart: unless-stopped
+
+  project4_auth:
+    build:
+      context: ./project4_auth
+      dockerfile: Dockerfile
+    container_name: fastapi_project4_auth
+    ports:
+      - "8003:8003"
+    restart: unless-stopped

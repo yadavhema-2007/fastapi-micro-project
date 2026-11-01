@@ -123,3 +123,45 @@ Content-Type: application/json
 
 ### 6. Delete Persistent Task
 DELETE http://127.0.0.1:8002/tasks/1
+
+
+### ==============================================================================
+### PROJECT 4: JWT AUTHENTICATION & SECURITY (PORT 8003)
+### ==============================================================================
+
+### 1. Public Welcome
+GET http://127.0.0.1:8003/
+Accept: application/json
+
+### 2. Register New User
+POST http://127.0.0.1:8003/auth/register
+Content-Type: application/json
+
+{
+  "username": "developer",
+  "password": "supersecretpassword123"
+}
+
+### 3. Login to get JWT Token
+# @name login
+POST http://127.0.0.1:8003/auth/login
+Content-Type: application/json
+
+{
+  "username": "developer",
+  "password": "supersecretpassword123"
+}
+
+### 4. Access Protected Profile (Replace YOUR_TOKEN_HERE with token from login response)
+GET http://127.0.0.1:8003/auth/me
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+
+### 5. Access Protected Confidential Vault Data
+GET http://127.0.0.1:8003/protected-data
+Authorization: Bearer YOUR_TOKEN_HERE
+Accept: application/json
+
+### 6. Attempt Unauthorized Access (Should return 401/403)
+GET http://127.0.0.1:8003/protected-data
+Accept: application/json

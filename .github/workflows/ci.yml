@@ -45,3 +45,11 @@ jobs:
       - name: Run Project 3 Tests
         run: |
           pytest project3_database -v
+
+      - name: Install Project 4 Dependencies
+        run: |
+          pip install -r project4_auth/requirements.txt
+
+      - name: Run Project 4 Tests
+        run: |
+          pytest project4_auth -v
