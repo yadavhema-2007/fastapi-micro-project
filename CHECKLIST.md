@@ -17,7 +17,7 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
   - [x] Tests `GET /` successful response & expected JSON
   - [x] Tests `GET /health` successful response & `{"status": "ok"}`
   - [x] Tests nonexistent route returns HTTP `404 Not Found` and `{"detail": "Not Found"}`
-  - [x] All assertions verified: **3 passed** in 0.61s
+  - [x] All assertions verified: **3 passed** in 0.45s
 - [x] **Dependency File:** `project1_basic/requirements.txt`
 - [x] **Documentation:** `project1_basic/README.md`
 - [x] **Live Server Verification:** Uvicorn tested on port 8000; `/docs` verified.
@@ -39,14 +39,32 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
   - [x] Input validation: Rejects empty titles and blank whitespace with HTTP 422
   - [x] Returns HTTP 404 via `HTTPException` when task does not exist
   - [x] In-memory storage (`tasks_db = {}`) with runtime ephemeral persistence explained
+  - [x] Interactive single-page web dashboard served at `GET /dashboard`
 - [x] **Test File:** `project2_crud/test_main.py`
-  - [x] 15 comprehensive automated test cases
+  - [x] 16 comprehensive automated test cases
   - [x] Automatic test isolation fixture (`@pytest.fixture(autouse=True)`) resets database state between tests
-  - [x] Tests all positive flows, validation errors (empty string, whitespace, missing fields), missing tasks (404), and deletions (204)
-  - [x] All assertions verified: **15 passed** in 1.04s
+  - [x] Tests all positive flows, validation errors (empty string, whitespace, missing fields), dashboard HTML serving, missing tasks (404), and deletions (204)
+  - [x] All assertions verified: **16 passed** in 0.90s
 - [x] **Dependency File:** `project2_crud/requirements.txt`
 - [x] **Documentation:** `project2_crud/README.md`
-- [x] **Live Server Verification:** Uvicorn tested on port 8001; `/docs` verified.
+- [x] **Live Server Verification:** Uvicorn tested on port 8001; `/docs` & `/dashboard` verified.
+
+---
+
+## ✅ Advanced Addition: Persistent Database with SQLite & SQLAlchemy (`project3_database`)
+
+- [x] **Folder Created:** `project3_database/`
+- [x] **Architecture Files:**
+  - [x] `database.py`: SQLAlchemy engine, `SessionLocal`, `Base`, and `get_db()` dependency injection
+  - [x] `models.py`: SQLAlchemy ORM `Task` model mapped to SQL table
+  - [x] `schemas.py`: Pydantic v2 schemas with `ConfigDict(from_attributes=True)`
+  - [x] `crud.py`: Database query functions (create, read, update, delete)
+  - [x] `main.py`: FastAPI routes injecting `db: Session = Depends(get_db)`
+- [x] **Test File:** `project3_database/test_main.py`
+  - [x] Uses SQLite in-memory `:memory:` with `StaticPool`
+  - [x] Implements `app.dependency_overrides[get_db]`
+  - [x] All assertions verified: **14 passed** in 1.91s
+- [x] **Persistence Verified:** Real SQLite database file `tasks.db` created on disk.
 
 ---
 
@@ -97,27 +115,18 @@ This checklist tracks every specific requirement requested for the **FastAPI Mic
 - [x] pytest & `fastapi.testclient.TestClient` mechanics
 - [x] Virtual environments (`.venv`) and `requirements.txt`
 - [x] Automated OpenAPI interactive documentation (`/docs` & `/redoc`)
-- [x] Line-by-line explanation of every source file in both projects
+- [x] Line-by-line explanation of every source file across all projects
 
 ---
 
 ## ✅ Additional Tools & Enhancements Added
 
-- [x] **GitHub Actions CI/CD Pipeline:** `.github/workflows/ci.yml`
-- [x] **Interactive Instructor Demo Menu:** `demo_runner.ps1`
+- [x] **Interactive Web Dashboard:** `http://127.0.0.1:8001/dashboard`
+- [x] **REST Client Collection:** `requests.http` with 14 executable requests
+- [x] **Multi-Container Microservices:** `docker-compose.yml` and `Dockerfile`s for all 3 projects
+- [x] **GitHub Actions CI/CD Pipeline:** `.github/workflows/ci.yml` (runs 33 automated tests)
+- [x] **Interactive Instructor Demo Menu:** `demo_runner.ps1` with 11 commands
 - [x] **Root Master README:** `README.md`
 - [x] **Dedicated Git Workflow Guide:** `GIT_WORKFLOW.md`
 - [x] **Oral Defense & Presentation Script:** `INSTRUCTOR_DEMO_GUIDE.md`
 - [x] **Persistent Mentor Dossier Artifact:** `fastapi_mentor_guide.md`
-
----
-
-## 📌 Pending Manual Action for Student
-
-- [ ] **Optional Remote GitHub Push:** If your instructor requires a live link on github.com:
-  ```powershell
-  git remote add origin https://github.com/<your-username>/fastapi-micro-project.git
-  git push -u origin main
-  git push -u origin feature/health-check
-  ```
-  *(All code, tests, and documentation are already complete on your local machine).*
