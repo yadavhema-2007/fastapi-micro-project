@@ -25,6 +25,8 @@ do {
     Write-Host " [5] Start Project 2 Live Server (Port 8001 + Swagger Docs)" -ForegroundColor Magenta
     Write-Host " [6] Show Git Branching Graph & Commit History" -ForegroundColor Yellow
     Write-Host " [7] Show Git Diff of feature/health-check against main" -ForegroundColor Yellow
+    Write-Host " [8] View Deliverables Checklist (CHECKLIST.md)" -ForegroundColor Cyan
+    Write-Host " [9] View Instructor Oral Defense & Code Guide (INSTRUCTOR_DEMO_GUIDE.md)" -ForegroundColor Cyan
     Write-Host " [Q] Quit" -ForegroundColor Red
     Write-Host ""
     $choice = Read-Host "Enter your choice"
@@ -87,12 +89,24 @@ do {
             Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
             Read-Host
         }
+        "8" {
+            Write-Host "`n>>> Displaying Deliverables Checklist (CHECKLIST.md):`n" -ForegroundColor Cyan
+            Get-Content "$PSScriptRoot\CHECKLIST.md" | Out-Host -Paging
+            Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
+            Read-Host
+        }
+        "9" {
+            Write-Host "`n>>> Displaying Instructor Defense Guide (INSTRUCTOR_DEMO_GUIDE.md):`n" -ForegroundColor Cyan
+            Get-Content "$PSScriptRoot\INSTRUCTOR_DEMO_GUIDE.md" | Out-Host -Paging
+            Write-Host "`nPress Enter to return to menu..." -ForegroundColor Gray
+            Read-Host
+        }
         "Q" {
             Write-Host "Exiting demo controller. Good luck with your presentation!" -ForegroundColor Green
             break
         }
         default {
-            Write-Host "Invalid choice, please select 1-7 or Q." -ForegroundColor Red
+            Write-Host "Invalid choice, please select 1-9 or Q." -ForegroundColor Red
             Start-Sleep -Seconds 1
         }
     }
