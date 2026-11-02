@@ -9,3 +9,5 @@ __pycache__/
 *.sqlite3
 
 .github/
+
+FastAPI_MicroProject_Submission.zip
