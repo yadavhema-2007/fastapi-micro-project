@@ -18,6 +18,6 @@ def read_root():
 def read_health():
     """Health check endpoint returning status ok and verification code 4413."""
     return {
-        "status": "false",
+        "status": "ok",
         "code": 4413
     }
