@@ -11,10 +11,17 @@ def test_read_root():
     assert response.json() == {"message": "Welcome to the FastAPI Micro Project!"}
 
 def test_health_check():
-    """Verify that GET /health returns HTTP 200 and {'status': 'ok'}."""
+    """Verify that GET /health returns HTTP 200 and {'status': 'ok', 'code': 4413}."""
     response = client.get("/health")
     assert response.status_code == 200
-    assert response.json() == {"status": "ok"}
+    assert response.json() == {"status": "ok", "code": 4413}
+
+def test_code_4413_passed():
+    """Explicitly verify that code 4413 is passed with status ok."""
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.json()["code"] == 4413
+    assert response.json()["status"] == "ok"
 
 def test_nonexistent_route():
     """Verify that requesting an undefined route returns HTTP 404 Not Found."""
