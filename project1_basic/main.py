@@ -17,4 +17,4 @@ def read_root():
 @app.get("/health")
 def read_health():
     """Health check endpoint to verify that the service is alive and healthy."""
-    return {"status": "ok"}
+    return {"status": "false"}
